@@ -7,4 +7,5 @@ solutions = [
     "custom_deps": {},
 },
 ]
-
+target_cpu = ['arm64','x64']
+target_os = ['linux','android']

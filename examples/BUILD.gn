@@ -44,7 +44,7 @@ group("examples") {
     deps += [ ":AppRTCMobile" ]
   }
 
-  if (is_linux || is_win) {
+  #if (is_linux || is_win) {
     deps += [
       ":peerconnection_server",
       ":stunserver",
@@ -54,7 +54,7 @@ group("examples") {
       deps += [ ":peerconnection_client" ]
       deps += [ ":peerconnection_gcc" ]
     }
-  }
+  #}
 
   if (is_android || is_win) {
     deps += [ ":webrtc_unity_plugin" ]
@@ -636,7 +636,7 @@ if (is_ios || (is_mac && target_cpu != "x86")) {
   }
 }
 
-if (is_linux || is_win) {
+#if (is_linux || is_win) {
   rtc_executable("peerconnection_client") {
     testonly = true
     sources = [
@@ -753,6 +753,7 @@ if (is_linux || is_win) {
       "../system_wrappers:field_trial",
       "../test:field_trial",
       "../test:platform_video_capturer",
+       "../test/logging:log_writer",
       "../test:test_support",
       "../test:video_test_support",
       "../test:rtp_test_utils",
@@ -838,7 +839,7 @@ if (is_linux || is_win) {
       "../rtc_base:rtc_base_approved",
     ]
   }
-}
+#}
 
 if (is_win || is_android) {
   rtc_shared_library("webrtc_unity_plugin") {
