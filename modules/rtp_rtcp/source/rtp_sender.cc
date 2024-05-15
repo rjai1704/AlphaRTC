@@ -310,8 +310,9 @@ int32_t RTPSender::ReSendPacket(uint16_t packet_id) {
   }
 
   const int32_t packet_size = static_cast<int32_t>(stored_packet->packet_size);
+  return packet_size;
+  /*
   const bool rtx = (RtxStatus() & kRtxRetransmitted) > 0;
-
   std::unique_ptr<RtpPacketToSend> packet =
       packet_history_->GetPacketAndMarkAsPending(
           packet_id, [&](const RtpPacketToSend& stored_packet) {
@@ -338,12 +339,13 @@ int32_t RTPSender::ReSendPacket(uint16_t packet_id) {
   if (!packet) {
     return -1;
   }
+  RTC_LOG(LS_ERROR) << "RTXPacket " << packet->Ssrc() <<":"<<packet->SequenceNumber() ;
   packet->set_packet_type(RtpPacketMediaType::kRetransmission);
   std::vector<std::unique_ptr<RtpPacketToSend>> packets;
   packets.emplace_back(std::move(packet));
   paced_sender_->EnqueuePackets(std::move(packets));
 
-  return packet_size;
+  return packet_size;*/
 }
 
 void RTPSender::OnReceivedAckOnSsrc(int64_t extended_highest_sequence_number) {
