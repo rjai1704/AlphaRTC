@@ -553,6 +553,11 @@ void PacingController::ProcessPackets() {
       packet_size += DataSize::Bytes(rtp_packet->headers_size()) +
                      transport_overhead_per_packet_;
     }
+
+    RTC_LOG(LS_ERROR)<< rtp_packet->SequenceNumber()
+               << "," << rtp_packet->Timestamp()
+               << "," << rtp_packet->Ssrc()
+	       << "," << rtp_packet->size();
     packet_sender_->SendRtpPacket(std::move(rtp_packet), pacing_info);
 
     data_sent += packet_size;

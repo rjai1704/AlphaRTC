@@ -1006,7 +1006,7 @@ VideoStreamEncoder::UpdateBitrateAllocationAndNotifyObserver(
 
   encoder_stats_observer_->OnBitrateAllocationUpdated(
       send_codec_, new_rate_settings.rate_control.bitrate);
-
+  RTC_LOG(LS_ERROR) << "Total bitrate changed : " << new_rate_settings.rate_control.bitrate.get_sum_kbps();
   return new_rate_settings;
 }
 

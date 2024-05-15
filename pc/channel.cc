@@ -468,6 +468,11 @@ void BaseChannel::OnRtpPacket(const webrtc::RtpPacketReceived& parsed_packet) {
   }
 
   auto packet_buffer = parsed_packet.Buffer();
+ 
+  RTC_LOG(LS_ERROR) << parsed_packet.SequenceNumber()
+              << "," << parsed_packet.Timestamp()
+              << "," << parsed_packet.Ssrc() //stream source number, corresponding to whether it is video or audio or multiple streams
+              << "," << parsed_packet.size();
 
   invoker_.AsyncInvoke<void>(
       RTC_FROM_HERE, worker_thread_, [this, packet_buffer, packet_time_us] {

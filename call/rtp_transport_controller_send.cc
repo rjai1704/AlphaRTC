@@ -123,7 +123,7 @@ RtpTransportControllerSend::RtpTransportControllerSend(
   initial_config_.event_log = event_log;
   initial_config_.key_value_config = trials;
   RTC_DCHECK(bitrate_config.start_bitrate_bps > 0);
-
+  RTC_LOG(LS_ERROR) << "Pacer bitrate upper limit :" << bitrate_config.start_bitrate_bps;
   pacer()->SetPacingRates(
       DataRate::BitsPerSec(bitrate_config.start_bitrate_bps), DataRate::Zero());
 
@@ -640,6 +640,7 @@ void RtpTransportControllerSend::PostUpdates(NetworkControlUpdate update) {
     pacer()->SetCongestionWindow(*update.congestion_window);
   }
   if (update.pacer_config) {
+    RTC_LOG(LS_ERROR) << "Pacing rate changed :" << update.pacer_config->data_rate().kbps() << " : " << update.pacer_config->pad_rate().kbps();	
     pacer()->SetPacingRates(update.pacer_config->data_rate(),
                             update.pacer_config->pad_rate());
   }

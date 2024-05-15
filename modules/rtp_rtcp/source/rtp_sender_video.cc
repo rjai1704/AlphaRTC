@@ -628,6 +628,7 @@ bool RTPSenderVideo::SendVideo(
     // the list of packets to send.
     auto fec_packets = fec_generator_->GetFecPackets();
     const bool generate_sequence_numbers = !fec_generator_->FecSsrc();
+    RTC_LOG(LS_ERROR) << "######### FEC Ssrc num: " << fec_generator_->FecSsrc().value();
     for (auto& fec_packet : fec_packets) {
       if (generate_sequence_numbers) {
         rtp_sender_->AssignSequenceNumber(fec_packet.get());
