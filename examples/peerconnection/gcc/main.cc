@@ -252,8 +252,8 @@ int main(int argc, char* argv[]) {
   }
 
   webrtc::field_trial::InitFieldTrialsFromString(
-      "WebRTC-KeepAbsSendTimeExtension/Enabled/");  //  Config for
-                                                    //  hasAbsSendTimestamp in
+      "WebRTC-KeepAbsSendTimeExtension/Enabled/WebRTC-DisableUlpFecExperiment/Enabled/");                                                  
+		                                    //  hasAbsSendTimestamp in
                                                     //  RTP Header extension
 
 #ifdef WIN32
