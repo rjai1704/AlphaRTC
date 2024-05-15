@@ -247,7 +247,11 @@ bool Conductor::InitializePeerConnection() {
     main_wnd_->MessageBox("Error", "CreatePeerConnection failed", true);
     DeletePeerConnection();
   }
-
+  webrtc::BitrateSettings bitrate;
+  bitrate.start_bitrate_bps = 2000000;
+  bitrate.min_bitrate_bps = 2000000;
+  bitrate.max_bitrate_bps = 2000000;
+  peer_connection_->SetBitrate(bitrate);
   AddTracks();
 
   // Start the timer for auto close.

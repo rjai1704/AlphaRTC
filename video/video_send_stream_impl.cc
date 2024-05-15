@@ -614,13 +614,18 @@ uint32_t VideoSendStreamImpl::OnBitrateUpdated(BitrateAllocationUpdate update) {
   RTC_DCHECK_RUN_ON(worker_queue_);
   RTC_DCHECK(rtp_video_sender_->IsActive())
       << "VideoSendStream::Start has not been called.";
-
+  RTC_LOG(LS_ERROR) << "BWE not passed onto encoder and video sender; ";
   // When the BWE algorithm doesn't pass a stable estimate, we'll use the
   // unstable one instead.
+
+  update.target_bitrate = DataRate::BitsPerSec(2200000);
   if (update.stable_target_bitrate.IsZero()) {
+
     update.stable_target_bitrate = update.target_bitrate;
   }
-
+  else 	
+    update.stable_target_bitrate = DataRate::BitsPerSec(2200000);
+  update.cwnd_reduce_ratio = 0.001;
   rtp_video_sender_->OnBitrateUpdated(update, stats_proxy_->GetSendFrameRate());
   encoder_target_rate_bps_ = rtp_video_sender_->GetPayloadBitrateBps();
   const uint32_t protection_bitrate_bps =
